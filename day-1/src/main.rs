@@ -19,7 +19,8 @@ fn main() {
         final_output += i;
     }
 
-    println!("{}", final_output);
+    println!("Part 1: {}", final_output);
+    println!("Part 2: {}", part_two(col1, col2));
 }
 
 fn return_vecs(path: &str) -> io::Result<(Vec<i32>, Vec<i32>)> {
@@ -63,4 +64,27 @@ fn return_vecs(path: &str) -> io::Result<(Vec<i32>, Vec<i32>)> {
     println!("Successfully read {} pairs of numbers.", column1_data.len());
 
     Ok((column1_data, column2_data))
+}
+
+fn part_two(col1: Vec<i32>, col2: Vec<i32>) -> i32 {
+    let mut final_vec: Vec<i32> = Vec::new();
+
+    let mut init: i32 = 0;
+
+    for i in col1.iter() {
+        let mut x = 0;
+
+        for j in col2.iter() {
+            if i == j {
+                x += 1;
+            }
+        }
+        final_vec.push(i * x);
+    }
+
+    for i in final_vec.iter() {
+        init += i;
+    }
+
+    init
 }
